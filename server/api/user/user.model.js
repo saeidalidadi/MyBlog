@@ -2,6 +2,7 @@
 
 import crypto from 'crypto';
 import mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate';
 mongoose.Promise = require('bluebird');
 import {Schema} from 'mongoose';
 
@@ -39,6 +40,9 @@ var UserSchema = new Schema({
   google: {},
   github: {}
 });
+
+// Adding pagination plugin
+UserSchema.plugin(mongoosePaginate);
 
 /**
  * Virtuals
