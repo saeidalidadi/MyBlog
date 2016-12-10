@@ -10,6 +10,7 @@ header#banner.hero-unit
       h1.page-header Features:
       ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='post in $ctrl.posts')
         li
+          img(ng-src="/posts/images")
           a(href='#', uib-tooltip='{{post.body}}')
             | {{post.title}}
-      ul(uib-pagination, total-items='1111111110', ng-model="currentPage", ng-change="pageChanged()")
+      ul(uib-pagination, total-items='$ctrl.posts.total', ng-model="$ctrl.posts.page", ng-change="pageChanged()")
