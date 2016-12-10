@@ -61,7 +61,9 @@ function handleError(res, statusCode) {
 
 // Gets a list of Posts
 export function index(req, res) {
-  return Post.find().exec()
+  return Post.find()
+  .select('title body')
+  .exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -99,4 +101,9 @@ export function destroy(req, res) {
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));
+}
+
+// Get image of post from DB
+export function image(req, res) {
+  res.send(true);
 }
