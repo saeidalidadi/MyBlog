@@ -42,6 +42,17 @@ function removeEntity(res) {
   };
 }
 
+function respondWhitImage(res) {
+  return function(entity) {
+    if(entity && entity.img) {
+      res.contentType(entity.img.contentType);
+      res.status(200).send(entity.img.data);
+    } else {
+      res.status(404).end();
+    }
+  }
+}
+
 function handleEntityNotFound(res) {
   return function(entity) {
     if (!entity) {
@@ -64,10 +75,8 @@ export function index(req, res) {
 
   const page = req.query.page || 0;
   const per_page = 2;
-  Post.find().count((err, count) => { console.log('There are %s Posts', count); });
 
   return Post.paginate({}, { select:'title body', limit: 2 }, (err, result) => {
-    console.log(result);
 
     respondWithResult(res)({
       data: result.docs,
@@ -114,5 +123,10 @@ export function destroy(req, res) {
 
 // Get image of post from DB
 export function image(req, res) {
-  res.send(true);
+  const id = require('mongoose').Types.ObjectId(req.params.id);
+  Post.findById(id, 'img.data img.contentType').exec()
+  .then(handleEntityNotFound(res))
+  .then(respondWhitImage(res))
+  .catch(handleError(res));
+  
 }
