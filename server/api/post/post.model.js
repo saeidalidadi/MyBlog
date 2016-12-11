@@ -7,7 +7,8 @@ const Schema = mongoose.Schema;
 var postSchema = new Schema({
   title: String,
   body: String,
-  user_id: Schema.Types.ObjectId
+  user_id: Schema.Types.ObjectId,
+  img: { data: Buffer, contentType: String }
 });
 
 postSchema.plugin(mongoosePaginate);

@@ -6,6 +6,9 @@
 'use strict';
 import Post from '../api/post/post.model';
 import User from '../api/user/user.model';
+import Fs from 'fs';
+
+let imageRelativePath = __dirname + '/../api/post/images/';
 
 const seedUserPosts = function(id) {
   Post.find({}).remove()
@@ -15,18 +18,23 @@ const seedUserPosts = function(id) {
       body: 'Integration with popular tools such as Bower, Grunt, Babel, Karma, ' +
              'Mocha, JSHint, Node Inspector, Livereload, Protractor, Jade, ' +
              'Stylus, Sass, and Less.',
-      user_id: id
+      user_id: id,
+      img: { data: Fs.readFileSync(imageRelativePath + 'flw_1.jpg'), contentType: 'image/jpg' }
     }, {
       title: 'Server and Client integration',
       body: 'Built with a powerful and fun stack: MongoDB, Express, ' +
              'AngularJS, and Node.',
-      user_id: id
+      user_id: id,
+      img: { data: Fs.readFileSync(imageRelativePath + 'flw_2.jpg'), contentType: 'image/jpg' }
+
     }, {
       title: 'Smart Build System',
       body: 'Build system ignores `spec` files, allowing you to keep ' +
              'tests alongside code. Automatic injection of scripts and ' +
              'styles into your index.html',
-      user_id: id
+      user_id: id,
+      img: { data: Fs.readFileSync(imageRelativePath + 'flw_3.jpg'), contentType: 'image/jpg' }
+
     }, {
       title: 'Modular Structure',
       body: 'Best practice client and server structures allow for more ' +

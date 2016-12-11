@@ -61,12 +61,12 @@ function handleError(res, statusCode) {
 
 // Gets a list of Posts
 export function index(req, res) {
-  console.log(req.query);
+
   const page = req.query.page || 0;
   const per_page = 2;
   Post.find().count((err, count) => { console.log('There are %s Posts', count); });
 
-  return Post.paginate({}, { limit: 2}, (err, result) => {
+  return Post.paginate({}, { select:'title body', limit: 2 }, (err, result) => {
     console.log(result);
 
     respondWithResult(res)({
@@ -110,4 +110,9 @@ export function destroy(req, res) {
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));
+}
+
+// Get image of post from DB
+export function image(req, res) {
+  res.send(true);
 }
