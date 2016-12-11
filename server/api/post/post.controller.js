@@ -61,9 +61,20 @@ function handleError(res, statusCode) {
 
 // Gets a list of Posts
 export function index(req, res) {
-  return Post.find().exec()
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+  console.log(req.query);
+  const page = req.query.page || 0;
+  const per_page = 2;
+  Post.find().count((err, count) => { console.log('There are %s Posts', count); });
+
+  return Post.paginate({}, { limit: 2}, (err, result) => {
+    console.log(result);
+
+    respondWithResult(res)({
+      data: result.docs,
+      total: result.total,
+      page: result.page,
+      pages: result.pages});
+  });
 }
 
 // Gets a single Post from the DB

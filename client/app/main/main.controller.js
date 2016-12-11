@@ -13,7 +13,7 @@
       this.$http.get('/api/posts')
         .then(response => {
           this.posts = response.data;
-        });
+      });
     }
 
     addPost() {
