@@ -11,7 +11,11 @@ header#banner.hero-unit
       ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='post in $ctrl.posts.data')
         li
           img(ng-src="api/posts/{{ post._id }}/image")
-          a(href='#', uib-tooltip='{{post.body}}')
+          h2(href='#', uib-tooltip='{{post.title}}')
             | {{post.title}}
-      ul(uib-pagination total-items="$ctrl.posts.total", ng-model="$ctrl.posts.page")
-      a all pages {{ $ctrl.posts.total }}
+          p {{post.body}}
+          .btns(ng-show="$ctrl.isLoggedIn()")
+            .btn.btn-primary(ng-click="$ctrl.editPost(post)") Edit
+            .btn.btn-danger Delete
+  .row
+    ul.col-lg-12.col-md-6(uib-pagination total-items="$ctrl.totalItems", ng-model="$ctrl.currentPage", ng-change="$ctrl.onChange()")

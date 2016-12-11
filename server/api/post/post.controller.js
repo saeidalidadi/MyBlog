@@ -73,11 +73,10 @@ function handleError(res, statusCode) {
 // Gets a list of Posts
 export function index(req, res) {
 
-  const page = req.query.page || 0;
+  const page = req.query.page || 1;
   const per_page = 2;
 
-  return Post.paginate({}, { select:'title body', limit: 2 }, (err, result) => {
-
+  return Post.paginate({}, { select:'title body', page: page, limit: 2 }, (err, result) => {
     respondWithResult(res)({
       data: result.docs,
       total: result.total,

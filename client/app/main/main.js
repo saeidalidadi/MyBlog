@@ -5,5 +5,5 @@ angular.module('myblogApp')
     $stateProvider.state('main', {
       url: '/',
       template: '<main></main>'
-    });
+    })
   });
