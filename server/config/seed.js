@@ -39,18 +39,24 @@ const seedUserPosts = function(id) {
       title: 'Modular Structure',
       body: 'Best practice client and server structures allow for more ' +
              'code reusability and maximum scalability',
-      user_id: id
+      user_id: id,
+      img: { data: Fs.readFileSync(imageRelativePath + 'flw_4.jpg'), contentType: 'image/jpg' }
+
     }, {
       title: 'Optimized Build',
       body: 'Build process packs up your templates as a single JavaScript ' +
              'payload, minifies your scripts/css/images, and rewrites asset ' +
              'names for caching.',
-      user_id: id
+      user_id: id,
+      img: { data: Fs.readFileSync(imageRelativePath + 'flw_5.jpg'), contentType: 'image/jpg' }
+
     }, {
       title: 'Deployment Ready',
       body: 'Easily deploy your app to Heroku or Openshift with the heroku ' +
              'and openshift subgenerators',
-      user_id: id
+      user_id: id,
+      img: { data: Fs.readFileSync(imageRelativePath + 'flw_6.jpg'), contentType: 'image/jpg' }
+
     });
   });
 }
