@@ -2,6 +2,8 @@
   .row
     form
       .form-group
+        input.form-control(type="file", ng-model="$ctrl.image")
+      .form-group
         label(for="title") Title
         input.form-control#title(type="text", ng-model="$ctrl.title")
       .form-group

@@ -13,13 +13,25 @@ class PostsController {
     console.log('init');
     //this.post = this.$state.params.post;
   }
-
-  saveNewPost () {
-    console.log('new post');
-    this.$http.post('/api/posts', {
-      title: this.title,
-      body: this.body,
-      state: 'unpublished'
+  _setNewPost () {
+    this.$http({
+      method: 'POST',
+      url: '/api/posts',
+      headers: { 'Content-Type': 'image/jpg' },
+      transformRequest: function (data) {
+        console.log('transform inside');
+        var formData = new FormData();
+        formData.append("content", angular.toJson(data.content));
+        formData.append("image", data.image);
+        return formData;
+      },
+      data: {
+        content: {
+          title: 'dddddddddddddddd',
+          body: 'eeeeeeeeeeeeeeee'
+        },
+        image: 'rrrrrrrrrrrrrrrrrrrrrr'
+      }
     })
     .then( response => {
       console.log(response);
@@ -27,6 +39,16 @@ class PostsController {
     .catch( err => {
       console.log(err);
     })
+  }
+
+  publishPost (post) {
+    console.log('publishing post');
+    this._setNewPost();
+  }
+
+  saveNewPost (post) {
+    post.state = 'unpublished';
+    this._setNewPost()
   }
 }
 

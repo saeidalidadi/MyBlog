@@ -22,6 +22,5 @@ header#banner.hero-unit
             .btn.btn-success(ng-show="post.inEdit" ng-click="$ctrl.savePost($index)") Save
             .btn.btn-primary(ng-show="post.inEdit" ng-click="$ctrl.updatePost($index)") Publish
             .btn.btn-danger(ng-click="$ctrl.deletePost($index)") Delete
-          a {{  }}
   .row
     ul.col-lg-12.col-md-6(uib-pagination total-items="$ctrl.posts.total", ng-model="$ctrl.currentPage", ng-change="$ctrl.onChange()")

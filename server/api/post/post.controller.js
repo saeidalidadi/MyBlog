@@ -76,7 +76,10 @@ export function index(req, res) {
   const page = req.query.page || 1;
   const per_page = 2;
 
-  return Post.paginate({}, { select:'title body user_id', page: page, limit: 2 }, (err, result) => {
+  return Post.paginate({}, {
+    select:'title body user_id',
+    page: page, limit: 2
+  }, (err, result) => {
     respondWithResult(res)({
       data: result.docs,
       total: result.total,
@@ -95,6 +98,8 @@ export function show(req, res) {
 
 // Creates a new Post in the DB
 export function create(req, res) {
+  
+  console.log(req.body);
   req.body.user_id = req.user._id;
   return Post.create(req.body)
     .then(respondWithResult(res, 201))

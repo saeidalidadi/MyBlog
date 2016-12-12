@@ -19,7 +19,6 @@
         .then(response => {
           this.posts = response.data;
           this.currentUser( (user) => {
-            console.log(user);
             this.user_id = user._id;
           });
           this.currentPage = 1;
@@ -49,14 +48,12 @@
     _setPost(post) {
       this.$http.put('/api/posts/' + post._id, post)
       .then(response => {
-        console.log('updated');
         post.inEdit = false;
       })
-      .catch( () => {
-        console.log('error');
+      .catch( (err) => {
+        console.log(err);
       })
       .finally( () => {
-        console.log('updating');
       });  
     }
 
@@ -72,8 +69,6 @@
     }
 
     editPost(index) {
-      //this.$state.go('edit', { post: post });
-      console.log(this.posts)
       this.posts.data[index].inEdit = true;
     }
 
@@ -82,8 +77,6 @@
       this.$http.delete('/api/posts/' + post._id)
       .then( () => {
         this.onChange();
-        //this.posts.data.slice(index, 1);
-        //this.totalItems--;
       });
     }
   }
