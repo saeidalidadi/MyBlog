@@ -4,18 +4,24 @@ header#banner.hero-unit
     p.lead Kick-start your next web app with Angular Fullstack
     img(src='assets/images/yeoman.png', alt='I\'m Yeoman')
 
-.container
+.container#loading-bar-container
   .row
     .col-lg-12
-      h1.page-header Features:
-      ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='post in $ctrl.posts.data')
-        li
+      h1.page-header Last Posts:
+      .col-md-4.col-lg-8.col-sm-12
+        .post(ng-repeat='post in $ctrl.posts.data')
           img(ng-src="api/posts/{{ post._id }}/image")
-          h2(href='#', uib-tooltip='{{post.title}}')
-            | {{post.title}}
-          p {{post.body}}
-          .btns(ng-show="$ctrl.isLoggedIn()")
-            .btn.btn-primary(ng-click="$ctrl.editPost(post)") Edit
-            .btn.btn-danger Delete
+          h2(ng-hide="post.inEdit") {{post.title}}
+          .form-group.title-input
+            input.form-control(ng-show="post.inEdit", ng-model="post.title")
+          p(ng-hide="post.inEdit") {{post.body}}
+          .form-group
+            textarea.form-control(ng-show="post.inEdit", ng-model="post.body")
+          .btns(ng-show="$ctrl.user_id == post.user_id")
+            .btn.btn-primary(ng-hide="post.inEdit", ng-click="$ctrl.editPost($index)") Edit
+            .btn.btn-success(ng-show="post.inEdit" ng-click="$ctrl.savePost($index)") Save
+            .btn.btn-primary(ng-show="post.inEdit" ng-click="$ctrl.updatePost($index)") Publish
+            .btn.btn-danger(ng-click="$ctrl.deletePost($index)") Delete
+          a {{  }}
   .row
-    ul.col-lg-12.col-md-6(uib-pagination total-items="$ctrl.totalItems", ng-model="$ctrl.currentPage", ng-change="$ctrl.onChange()")
+    ul.col-lg-12.col-md-6(uib-pagination total-items="$ctrl.posts.total", ng-model="$ctrl.currentPage", ng-change="$ctrl.onChange()")

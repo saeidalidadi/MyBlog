@@ -76,7 +76,7 @@ export function index(req, res) {
   const page = req.query.page || 1;
   const per_page = 2;
 
-  return Post.paginate({}, { select:'title body', page: page, limit: 2 }, (err, result) => {
+  return Post.paginate({}, { select:'title body user_id', page: page, limit: 2 }, (err, result) => {
     respondWithResult(res)({
       data: result.docs,
       total: result.total,
@@ -95,6 +95,7 @@ export function show(req, res) {
 
 // Creates a new Post in the DB
 export function create(req, res) {
+  req.body.user_id = req.user._id;
   return Post.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
@@ -105,11 +106,14 @@ export function update(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
+  setTimeout( () => {
+  console.log(req.body);
   return Post.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
     .then(respondWithResult(res))
     .catch(handleError(res));
+  }, 1000)
 }
 
 // Deletes a Post from the DB

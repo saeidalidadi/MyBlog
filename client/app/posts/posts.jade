@@ -1,4 +1,12 @@
-script(src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular-rangy.min.js')
-script(src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular-sanitize.min.js')
-script(src='http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular.min.js') 
-.editor(text-angular ng-model="htmlVariable")
+.container
+  .row
+    form
+      .form-group
+        label(for="title") Title
+        input.form-control#title(type="text", ng-model="$ctrl.title")
+      .form-group
+        label(for="content") Content
+        textarea.form-control#content(ng-model="$ctrl.body")
+      .form-group
+        button.btn.btn-success(ng-click="$ctrl.publishPost()") Publish
+        button.btn.btn-primary(ng-click="$ctrl.saveNewPost()") Save

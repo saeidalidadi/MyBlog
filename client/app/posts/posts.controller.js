@@ -3,16 +3,30 @@
 (function(){
 
 class PostsController {
-  constructor($scope, $state) {
-    this.message = 'Hello';
+  constructor($scope, $state, $http) {
     //this.$scope = $scope;
     this.$state = $state;
+    this.$http = $http;
   }
 
   $onInit() {
-    //alert('init edit route');
-    console.log('state of posts', this.$state.params);
-    this.post = this.$state.params.post;
+    console.log('init');
+    //this.post = this.$state.params.post;
+  }
+
+  saveNewPost () {
+    console.log('new post');
+    this.$http.post('/api/posts', {
+      title: this.title,
+      body: this.body,
+      state: 'unpublished'
+    })
+    .then( response => {
+      console.log(response);
+    })
+    .catch( err => {
+      console.log(err);
+    })
   }
 }
 

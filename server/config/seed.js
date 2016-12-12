@@ -7,6 +7,7 @@
 import Post from '../api/post/post.model';
 import User from '../api/user/user.model';
 import Fs from 'fs';
+import Moment from 'moment';
 
 let imageRelativePath = __dirname + '/../api/post/images/';
 
@@ -19,14 +20,16 @@ const seedUserPosts = function(id) {
              'Mocha, JSHint, Node Inspector, Livereload, Protractor, Jade, ' +
              'Stylus, Sass, and Less.',
       user_id: id,
-      img: { data: Fs.readFileSync(imageRelativePath + 'flw_1.jpg'), contentType: 'image/jpg' }
+      img: { data: Fs.readFileSync(imageRelativePath + 'flw_1.jpg'), contentType: 'image/jpg' },
+      state: 'published',
+      created_at: Moment().subtract(1, 'd') 
     }, {
       title: 'Server and Client integration',
       body: 'Built with a powerful and fun stack: MongoDB, Express, ' +
              'AngularJS, and Node.',
       user_id: id,
-      img: { data: Fs.readFileSync(imageRelativePath + 'flw_2.jpg'), contentType: 'image/jpg' }
-
+      img: { data: Fs.readFileSync(imageRelativePath + 'flw_2.jpg'), contentType: 'image/jpg' },
+      state: 'published'
     }, {
       title: 'Smart Build System',
       body: 'Build system ignores `spec` files, allowing you to keep ' +
@@ -48,15 +51,15 @@ const seedUserPosts = function(id) {
              'payload, minifies your scripts/css/images, and rewrites asset ' +
              'names for caching.',
       user_id: id,
-      img: { data: Fs.readFileSync(imageRelativePath + 'flw_5.jpg'), contentType: 'image/jpg' }
-
+      img: { data: Fs.readFileSync(imageRelativePath + 'flw_5.jpg'), contentType: 'image/jpg' },
+      state: 'unpublished'
     }, {
       title: 'Deployment Ready',
       body: 'Easily deploy your app to Heroku or Openshift with the heroku ' +
              'and openshift subgenerators',
       user_id: id,
-      img: { data: Fs.readFileSync(imageRelativePath + 'flw_6.jpg'), contentType: 'image/jpg' }
-
+      img: { data: Fs.readFileSync(imageRelativePath + 'flw_6.jpg'), contentType: 'image/jpg' },
+      created_at: Moment().subtract(2, 'w')
     });
   });
 }

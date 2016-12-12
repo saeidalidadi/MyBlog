@@ -3,9 +3,9 @@
 angular.module('myblogApp')
   .config(function ($stateProvider) {
     $stateProvider
-      .state('edit', {
+      .state('publish', {
         url: '/posts',
         template: '<posts></posts>',
-        params: { post: 'posts for edit' }
+        authenticate: 'user'
       });
   });
