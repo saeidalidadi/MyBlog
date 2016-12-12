@@ -98,10 +98,16 @@ export function show(req, res) {
 
 // Creates a new Post in the DB
 export function create(req, res) {
-  
+  const file = req.file;
+  console.log(file);
+  const content = req.body;
   console.log(req.body);
-  req.body.user_id = req.user._id;
-  return Post.create(req.body)
+  return Post.create({
+      title: content.title,
+      body: content.body,
+      user_id: req.user._id,
+      img: { data: file.buffer, contentType: file.mimetype } 
+    })
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }

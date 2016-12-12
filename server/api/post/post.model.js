@@ -10,7 +10,7 @@ var postSchema = new Schema({
   body:  { type: String, maxlength: 1000, minlength: 30, required: true },
   user_id: Schema.Types.ObjectId,
   img:   { data: Buffer, contentType: String },
-  state: { type: String, enum: ['published', 'deleted', 'unpublished'] },
+  state: { type: String, enum: ['published', 'deleted', 'unpublished'], default: 'published' },
   created_at: { type: Date, default: Moment().format() }
 });
 

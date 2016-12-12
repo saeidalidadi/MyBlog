@@ -14,10 +14,11 @@ class PostsController {
     //this.post = this.$state.params.post;
   }
   _setNewPost () {
+    console.log(this.title);
     this.$http({
       method: 'POST',
       url: '/api/posts',
-      headers: { 'Content-Type': 'image/jpg' },
+      headers: { 'Content-Type': 'multipart/form-data' },
       transformRequest: function (data) {
         console.log('transform inside');
         var formData = new FormData();
@@ -30,7 +31,7 @@ class PostsController {
           title: 'dddddddddddddddd',
           body: 'eeeeeeeeeeeeeeee'
         },
-        image: 'rrrrrrrrrrrrrrrrrrrrrr'
+        image: this.image
       }
     })
     .then( response => {
