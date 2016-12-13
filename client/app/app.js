@@ -6,7 +6,7 @@ angular.module('myblogApp', [
   'ngCookies', 'ngResource', 'ngSanitize', 'ui.router',
   'ui.bootstrap', 'validation.match',
   'angular-loading-bar',
-  'ngFileUpload'
+  'ngFileUpload', 'ngMessages'
   ])
   .config(function($urlRouterProvider, $locationProvider, uibPaginationConfig) {
     $urlRouterProvider.otherwise('/');
