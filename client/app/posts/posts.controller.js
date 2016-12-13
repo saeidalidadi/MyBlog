@@ -16,17 +16,16 @@ class PostsController {
   }
 
   _setNewPost () {
-    console.log(this.image);
     this.Upload.upload({
       url: '/api/posts/',
       data: { image: this.image, content: { body: this.body, title: this.title } } 
     })
     .then( response => {
-      console.log(response);
-    })
-    .catch( err => {
-      console.log(err);
-    })
+        console.log(response);
+    }, 
+      err => { console.log(err); },
+      progress => { console.log(progress); }
+    )
   }
 
   publishPost (post) {

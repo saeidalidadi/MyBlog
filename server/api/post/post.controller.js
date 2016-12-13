@@ -101,14 +101,16 @@ export function show(req, res) {
 export function create(req, res) {
   const file = req.file;
   const content = req.body.content;
-  return Post.create({
-      title: content.title,
-      body: content.body,
-      user_id: req.user._id,
-      img: { data: file.buffer, contentType: file.mimetype } 
-    })
-    .then(respondWithResult(res, 201))
-    .catch(handleError(res));
+  setTimeout( () => {
+    return Post.create({
+        title: content.title,
+        body: content.body,
+        user_id: req.user._id,
+        img: { data: file.buffer, contentType: file.mimetype } 
+      })
+      .then(respondWithResult(res, 201))
+      .catch(handleError(res));
+  }, 1000)
 }
 
 // Updates an existing Post in the DB
@@ -122,7 +124,7 @@ export function update(req, res) {
     .then(saveUpdates(req.body))
     .then(respondWithResult(res))
     .catch(handleError(res));
-  }, 1000)
+  }, req.app.locals.timeOut)
 }
 
 // Deletes a Post from the DB

@@ -26,6 +26,7 @@ export default function(app) {
   var env = app.get('env');
 
   if (env === 'development' || env === 'test') {
+    app.locals.timeOut = 1000;
     app.use(express.static(path.join(config.root, '.tmp')));
   }
 
