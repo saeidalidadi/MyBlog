@@ -4,21 +4,34 @@
       form(name="postForm")
         .form-group
           img.thumbnail(ngf-src="$ctrl.image", ngf-select ngf-size="{ width: 20, height: 20 }")
-          input.form-control(type="file", ngf-select ng-model="$ctrl.image", name="postImage"
+          input.form-control(type="file", ngf-select ng-model="$ctrl.image", name="image"
             ngf-accept="'image/*'"
             novalidate
             required)
-        .form-group
+          .message(ng-messages="postForm.image.$error")
+
+        .form-group(ng-class="{'has-error': postForm.title.$invalid && postForm.title.$touched }")
           label(for="title") Title
-          input.form-control#title(type="text", ng-model="$ctrl.title"
-            name="title"
+          input.form-control#title(type="text", ng-model="$ctrl.title", name="title"
             novalidate
             ng-minlength="10", ng-maxlength="60"
             required)
-          .message(ng-class="{'has-error': postForm.title.$invalid }")
-        .form-group
+          .help-block(ng-messages="postForm.title.$error", ng-if="postForm.title.$touched")
+            p(ng-message="required") Title can't be empty.
+            p(ng-message="maxlength") Title must be less than 60 characters.
+            p(ng-message="minlength") Title of your post must be at least 10 characters.
+            
+        .form-group(ng-class="{'has-error': postForm.body.$invalid && postForm.body.$touched }")
           label(for="content") Content
-          textarea.form-control#content(ng-model="$ctrl.body", ng-minlength="30", ng-maxlength="1000", required)
+          textarea.form-control#content(ng-model="$ctrl.body", name="body"
+            ng-minlength="30", ng-maxlength="1000"
+            novalidate
+            required)
+          .help-block(ng-messages="postForm.body.$error")
+            p(ng-message="required") Content can't be empty.
+            p(ng-message="maxlength") Content must be less than 1000 characters.
+            p(ng-message="minlength") Content of your post must be at least 30 characters.
+  
         .form-group
           button.btn.btn-success(ng-click="$ctrl.publishPost()") Publish
           button.btn.btn-primary(ng-click="$ctrl.saveNewPost()") Save

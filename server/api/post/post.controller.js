@@ -99,8 +99,8 @@ export function show(req, res) {
 
 // Creates a new Post in the DB
 export function create(req, res) {
-  const file = req.file;
-  const content = req.body.content;
+  const file = req.file || {};
+  const content = req.body.content || {};
   setTimeout( () => {
     return Post.create({
         title: content.title,
