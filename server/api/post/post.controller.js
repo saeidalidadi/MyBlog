@@ -84,7 +84,8 @@ export function index(req, res) {
       data: result.docs,
       total: result.total,
       page: result.page,
-      pages: result.pages});
+      pages: result.pages
+    });
   });
 }
 
@@ -99,9 +100,7 @@ export function show(req, res) {
 // Creates a new Post in the DB
 export function create(req, res) {
   const file = req.file;
-  console.log(file);
-  const content = req.body;
-  console.log(req.body);
+  const content = req.body.content;
   return Post.create({
       title: content.title,
       body: content.body,
@@ -118,7 +117,6 @@ export function update(req, res) {
     delete req.body._id;
   }
   setTimeout( () => {
-  console.log(req.body);
   return Post.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))

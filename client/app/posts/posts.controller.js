@@ -3,36 +3,23 @@
 (function(){
 
 class PostsController {
-  constructor($scope, $state, $http) {
+  constructor($scope, $state, $http, Upload) {
     //this.$scope = $scope;
     this.$state = $state;
     this.$http = $http;
+    this.Upload = Upload;
   }
 
   $onInit() {
     console.log('init');
     //this.post = this.$state.params.post;
   }
+
   _setNewPost () {
-    console.log(this.title);
-    this.$http({
-      method: 'POST',
-      url: '/api/posts',
-      headers: { 'Content-Type': 'multipart/form-data' },
-      transformRequest: function (data) {
-        console.log('transform inside');
-        var formData = new FormData();
-        formData.append("content", angular.toJson(data.content));
-        formData.append("image", data.image);
-        return formData;
-      },
-      data: {
-        content: {
-          title: 'dddddddddddddddd',
-          body: 'eeeeeeeeeeeeeeee'
-        },
-        image: this.image
-      }
+    console.log(this.image);
+    this.Upload.upload({
+      url: '/api/posts/',
+      data: { image: this.image, content: { body: this.body, title: this.title } } 
     })
     .then( response => {
       console.log(response);
@@ -48,7 +35,7 @@ class PostsController {
   }
 
   saveNewPost (post) {
-    post.state = 'unpublished';
+    //post.state = 'unpublished';
     this._setNewPost()
   }
 }

@@ -1,14 +1,16 @@
 .container
   .row
-    form
-      .form-group
-        input.form-control(type="file", ng-model="$ctrl.image")
-      .form-group
-        label(for="title") Title
-        input.form-control#title(type="text", ng-model="$ctrl.title")
-      .form-group
-        label(for="content") Content
-        textarea.form-control#content(ng-model="$ctrl.body")
-      .form-group
-        button.btn.btn-success(ng-click="$ctrl.publishPost()") Publish
-        button.btn.btn-primary(ng-click="$ctrl.saveNewPost()") Save
+    .col-sm-12
+      form(name="publishForm")
+        .form-group
+          img.thumbnail(ngf-src="$ctrl.image", ngf-select ngf-size="{ width: 20, height: 20 }")
+          input.form-control(type="file", ngf-select ng-model="$ctrl.image", ngf-accept="'image/*'")
+        .form-group
+          label(for="title") Title
+          input.form-control#title(type="text", ng-model="$ctrl.title")
+        .form-group
+          label(for="content") Content
+          textarea.form-control#content(ng-model="$ctrl.body")
+        .form-group
+          button.btn.btn-success(ng-click="$ctrl.publishPost()") Publish
+          button.btn.btn-primary(ng-click="$ctrl.saveNewPost()") Save

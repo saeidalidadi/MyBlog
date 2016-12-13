@@ -79,7 +79,6 @@ User.find({}).remove()
       password: 'admin'
     })
     .then((user) => {
-      console.log(user);
       seedUserPosts(user._id);
       console.log('finished populating users');
     });
