@@ -4,8 +4,8 @@ angular.module('myblogApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('publish', {
-        url: '/posts',
-        template: '<posts></posts>',
+        url: '/publish',
+        template: '<publish></publish>',
         authenticate: 'user'
       });
   });

@@ -33,8 +33,9 @@
             p(ng-message="minlength") Content of your post must be at least 30 characters.
   
         .form-group
-          button.btn.btn-success(ng-click="$ctrl.publishPost()" ng-disabled="postForm.$invalid")
+          button.btn.btn-success(ng-click="$ctrl.publish()" ng-disabled="postForm.$invalid")
             | Publish
           = ' '
-          button.btn.btn-primary(ng-click="$ctrl.saveNewPost()" ng-disabled="postForm.$invalid")
+          button.btn.btn-primary(ng-click="$ctrl.save()" ng-disabled="postForm.$invalid")
             | Save
+        p {{ $ctrl.message }}
